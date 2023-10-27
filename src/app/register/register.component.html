@@ -1,8 +1,32 @@
 <div>
-  <form [formGroup]="registerForm">
-    <input id="username" class="formControl" type="text" [formControl]="usernameCtrl" placeholder="Username">
-    <input id="email" class="formControl" type="text" [formControl]="emailCtrl" placeholder="Email">
-    <input id="password" class="formControl" type="password" [formControl]="passwordCtrl" placeholder="Password">
-    <input id="confirmPassword" class="formControl" type="password" [formControl]="confirmPasswordCtrl" placeholder="Confirm your password">
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput  id="username" class="formControl" type="text"[formControl]="usernameCtrl" >
+      <mat-error *ngIf="usernameCtrl.errors?.['minlength']">Username must be at least 3 characters long.</mat-error>
+      <mat-error *ngIf="usernameCtrl.errors?.['required']">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput id="email" class="formControl" type="email" [formControl]="emailCtrl" >
+      <mat-error *ngIf="emailCtrl.errors?.['required']">Required</mat-error>
+      <mat-error *ngIf="emailCtrl.errors?.['emailFormatInvalid']">Must be a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput id="password" class="formControl" type="password" [formControl]="passwordCtrl">
+      <mat-error *ngIf="passwordCtrl.errors?.['required']">Required</mat-error>
+      <mat-error *ngIf="passwordCtrl.errors?.['minlength']">Must be at least 8 character long</mat-error>
+      <mat-error *ngIf="passwordCtrl.errors?.['passwordFormatInvalid']">
+        Must be a password with at least 1 special character, 1 uppercase, 1 lowercase, 1 number
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm your password</mat-label>
+      <input matInput id="confirmPassword" class="formControl" type="password" [formControl]="confirmPasswordCtrl">
+      <mat-error *ngIf="registerForm.errors?.['notSamePasswordError']">Must be the same password</mat-error>
+    </mat-form-field>
+      <button mat-raised-button color="primary">Register</button>
   </form>
+
 </div>

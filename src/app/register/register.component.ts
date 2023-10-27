@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import emailFormatValidator from '../shared/validators/emailValidator/email.validator';
 import { passwordConfirmValidator, passwordFormatValidator } from '../shared/validators/passwordValidator/password.validator';
 
@@ -14,7 +16,8 @@ const REGISTRATION_KEYS = {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule],
+
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
@@ -45,6 +48,11 @@ export default class RegisterComponent {
   });
 
   constructor() {
+
+
+  }
+
+  registerUser() : void {
 
   }
 }
