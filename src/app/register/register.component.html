@@ -1,1 +1,8 @@
-<p>register works!</p>
+<div>
+  <form [formGroup]="registerForm">
+    <input id="username" class="formControl" type="text" [formControl]="usernameCtrl" placeholder="Username">
+    <input id="email" class="formControl" type="text" [formControl]="emailCtrl" placeholder="Email">
+    <input id="password" class="formControl" type="password" [formControl]="passwordCtrl" placeholder="Password">
+    <input id="confirmPassword" class="formControl" type="password" [formControl]="confirmPasswordCtrl" placeholder="Confirm your password">
+  </form>
+</div>
