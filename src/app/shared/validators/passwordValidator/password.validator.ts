@@ -1,16 +1,16 @@
 import { ValidatorFn, AbstractControl, ValidationErrors } from "@angular/forms";
+import { PWD_REGEX } from "../../constants/auth.const";
 
 export function passwordConfirmValidator(pwdKey: string, pwdConfirmKey: string): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const passwordValue = control.get(pwdKey)?.value;
     const confirmPasswordValue = control.get(pwdConfirmKey)?.value;
-    return passwordValue === confirmPasswordValue ? null : { notSamePasswordError: { value: control.value } };
+    return passwordValue === confirmPasswordValue ? null : { notSamePasswordError: true};
   };
 }
 export function passwordFormatValidator(): ValidatorFn {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   return (control: AbstractControl): ValidationErrors | null => {
-    const isValidPassword = regex.test(control.value);
+    const isValidPassword = PWD_REGEX.test(control.value);
     return isValidPassword ? null : { passwordFormatInvalid: { value: control.value } };
   };
 }

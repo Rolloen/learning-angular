@@ -1,0 +1,16 @@
+{
+  "auth.error.required" : "Required",
+  "auth.error.username.minlength" : "Username must be at least 3 characters long",
+  "auth.error.email.valid" : "Must be a valid email",
+  "auth.error.pwd.minlength" : "Password must be at least 8 characters long",
+  "auth.error.pwd.valid" : "Must be a password with at least 1 special character, 1 uppercase, 1 lowercase, 1 number",
+  "auth.error.pwd.same" : "Must be the same password",
+  "auth.field.username" : "Username",
+  "auth.field.email" : "Email",
+  "auth.field.pwd" : "Password",
+  "auth.field.confirmPwd" : "Confirm password",
+  "auth.register" : "Register"
+
+
+
+}
