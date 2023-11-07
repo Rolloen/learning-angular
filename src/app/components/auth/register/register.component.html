@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="registerForm" (ngSubmit)="registerUser">
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
     <mat-form-field>
       <mat-label>{{"auth.field.username" | translate}}</mat-label>
       <input matInput  id="username" class="formControl" type="text"[formControl]="usernameCtrl" >
@@ -26,7 +26,8 @@
       <input matInput id="confirmPassword" class="formControl" type="password" [formControl]="confirmPasswordCtrl">
       <mat-hint *ngIf="registerForm.errors?.['notSamePasswordError']" align="start">{{'auth.error.pwd.same' | translate}}</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="primary">{{'auth.register' | translate}}</button>
+    <button mat-raised-button type="submit" color="primary">{{'auth.register' | translate}}</button>
+    <!-- <input type="submit" value=""> -->
   </form>
 
 </div>

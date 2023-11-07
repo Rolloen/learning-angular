@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: 'register', loadComponent: () => import('./register/register.component')},
+  { path: 'register', loadComponent: () => import('./components/auth/register/register.component')},
 ];

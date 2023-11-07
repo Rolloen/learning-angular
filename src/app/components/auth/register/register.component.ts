@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
-import emailFormatValidator from '../shared/validators/emailValidator/email.validator';
-import { passwordConfirmValidator, passwordFormatValidator } from '../shared/validators/passwordValidator/password.validator';
-import { AUTH_CONST } from '../shared/constants/auth.const';
+
+import emailFormatValidator from '../../../core/validators/emailValidator/email.validator';
+import { passwordConfirmValidator, passwordFormatValidator } from '../../../core/validators/passwordValidator/password.validator';
+import { AUTH_CONST } from '../../../core/constants/auth.const';
+import { UserRegistrationModel } from '../../../core/models/user.model';
+import { UserRegisterActions } from '../../../core/store/actions/userRegistration.actions';
 
 const REGISTRATION_KEYS = {
   userNameCtrl: 'usernameCtrl',
@@ -23,6 +27,8 @@ const REGISTRATION_KEYS = {
   styleUrls: ['./register.component.scss']
 })
 export default class RegisterComponent {
+  userToRegister?: UserRegistrationModel;
+
   usernameCtrl = new FormControl('', [
     Validators.required,
     Validators.minLength(AUTH_CONST.USERNAME_MINLENGTH)
@@ -48,7 +54,7 @@ export default class RegisterComponent {
     ]
   });
 
-  constructor() {
+  constructor(private store: Store) {
 
 
   }
@@ -57,6 +63,14 @@ export default class RegisterComponent {
     if(this.registerForm.invalid) {
       return;
     }
+
+    this.userToRegister = {
+      email : this.emailCtrl.value,
+      username : this.usernameCtrl.value,
+      password : this.passwordCtrl.value
+    }
+
+    this.store.dispatch(UserRegisterActions.registerUser({props:this.userToRegister}));
   }
 }
 

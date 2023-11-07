@@ -1,5 +1,5 @@
 import { ValidatorFn, AbstractControl, ValidationErrors } from "@angular/forms";
-import { PWD_REGEX } from "../../constants/auth.const";
+import { PWD_REGEX } from "../../../core/constants/auth.const";
 
 export function passwordConfirmValidator(pwdKey: string, pwdConfirmKey: string): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

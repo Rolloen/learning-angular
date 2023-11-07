@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 import  RegisterComponent  from './register.component';
 
 describe('RegisterComponent', () => {
@@ -8,7 +9,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RegisterComponent, BrowserAnimationsModule]
+      imports: [RegisterComponent, BrowserAnimationsModule, TranslateModule.forRoot()]
 
     });
     fixture = TestBed.createComponent(RegisterComponent);
