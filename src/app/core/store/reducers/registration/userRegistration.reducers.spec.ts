@@ -1,6 +1,6 @@
+import { registerSuccess } from '../../actions/userRegistration.actions';
 import * as fromReducer from './userRegistration.reducers';
-import { registerUser } from '../actions/userRegistration.actions';
-import { UserModel } from '../../models/user.model';
+
 
 describe('Register user reducer', () => {
   describe('unknown action', () => {
@@ -15,20 +15,16 @@ describe('Register user reducer', () => {
     });
   });
 
-  describe('userRegistration action', () => {
-    it('should update state with new registratedUser in immutable way', () => {
+  describe('userRegistrationSuccess action', () => {
+    it('should update state with isRegistered to true in immutable way', () => {
       //GIVEN
-      const newUser:UserModel = {
-        email : 'test@test.com',
-        username: 'TestApp'
-      }
       const { initialState } = fromReducer;
       const newState: fromReducer.registrationState =  {
-        createdUser: newUser,
+        isRegistered: true,
         emailExistsErr: false
       }
       //WHEN
-      const action = registerUser({props: newUser})
+      const action = registerSuccess();
       const state = fromReducer.userRegistrationReducers(initialState, action);
 
       //THEN

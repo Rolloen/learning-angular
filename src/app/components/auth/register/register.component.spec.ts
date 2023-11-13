@@ -1,17 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { StoreModule } from '@ngrx/store';
 import  RegisterComponent  from './register.component';
+import { registrationState, userRegistrationReducers } from '../../../core/store/reducers/registration/userRegistration.reducers';
+
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
-
+  let mockStore: MockStore<registrationState>;
+  const initialState = {
+    registration: userRegistrationReducers
+  };
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RegisterComponent, BrowserAnimationsModule, TranslateModule.forRoot()]
-
+      imports: [RegisterComponent, BrowserAnimationsModule, TranslateModule.forRoot()],
+      providers: [
+        provideMockStore({ initialState })
+      ]
     });
+    mockStore = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

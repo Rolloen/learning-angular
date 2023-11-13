@@ -1,6 +1,6 @@
 export interface UserModel {
-  username? : string | null,
-  email? : string | null,
+  username : string,
+  email : string ,
   // password? : string | null
 }
 

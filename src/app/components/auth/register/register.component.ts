@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import emailFormatValidator from '../../../core/validators/emailValidator/email.validator';
-import { passwordConfirmValidator, passwordFormatValidator } from '../../../core/validators/passwordValidator/password.validator';
 import { AUTH_CONST } from '../../../core/constants/auth.const';
 import { UserRegistrationModel } from '../../../core/models/user.model';
 import { UserRegisterActions } from '../../../core/store/actions/userRegistration.actions';
+import emailFormatValidator from '../../../core/validators/emailValidator/email.validator';
+import { passwordConfirmValidator, passwordFormatValidator } from '../../../core/validators/passwordValidator/password.validator';
 
 const REGISTRATION_KEYS = {
   userNameCtrl: 'usernameCtrl',

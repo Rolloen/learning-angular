@@ -29,6 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 TODO : 
 - testing translate module? 
-- add ngrx 
 - add fake auth in ngrx
 - confirm password error not displayed when user typing but only after user submitted
