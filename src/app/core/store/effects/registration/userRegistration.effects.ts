@@ -19,7 +19,7 @@ export const registerNewUser = createEffect(
           map((res) => {
             console.log(res);
 
-            return UserRegisterActions.registerSuccess()
+            return UserRegisterActions.registerSuccess();
           }),
           catchError((err : HttpCustomError) => {
             console.error(err);

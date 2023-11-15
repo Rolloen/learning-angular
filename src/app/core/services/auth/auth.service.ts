@@ -18,7 +18,7 @@ export class AuthService {
     private http : HttpClient
   ) { }
 
-  registerUser(userToRegister : UserRegistrationModel)  {
+  registerUser(userToRegister: UserRegistrationModel) {
     return this.http.post<boolean | HttpCustomError>(API_URLS.register, userToRegister).pipe(
       map((res)=> res),
       catchError((err: HttpCustomError) => throwError(() => err))
