@@ -9,7 +9,9 @@
   "auth.field.email" : "Email",
   "auth.field.pwd" : "Password",
   "auth.field.confirmPwd" : "Confirm password",
-  "auth.register" : "Register"
+  "auth.register" : "Register",
+  "auth.login" : "Login"
+
 
 
 

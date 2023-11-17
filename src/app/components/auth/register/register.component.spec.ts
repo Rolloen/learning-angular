@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import  RegisterComponent  from './register.component';
 import { registrationState, userRegistrationReducers } from '../../../core/store/reducers/registration/userRegistration.reducers';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('RegisterComponent', () => {
@@ -16,7 +17,7 @@ describe('RegisterComponent', () => {
   };
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RegisterComponent, BrowserAnimationsModule, TranslateModule.forRoot()],
+      imports: [RegisterComponent, BrowserAnimationsModule, TranslateModule.forRoot(), RouterTestingModule],
       providers: [
         provideMockStore({ initialState })
       ]

@@ -1,4 +1,7 @@
 <div>
+  <nav>
+    <a [routerLink]="['/']" routerLinkActive="router-link-active">Back home</a>
+  </nav>
   <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
     <mat-form-field>
       <mat-label>{{"auth.field.username" | translate}}</mat-label>

@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { AUTH_CONST } from '../../../core/constants/auth.const';
 import { UserRegistrationModel } from '../../../core/models/user.model';
 import { UserRegisterActions } from '../../../core/store/actions/userRegistration.actions';
@@ -22,11 +22,14 @@ const REGISTRATION_KEYS = {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, TranslateModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, TranslateModule, MatButtonModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export default class RegisterComponent {
+
+  store = inject(Store);
+
   userToRegister?: UserRegistrationModel;
 
   usernameCtrl = new FormControl('', [
@@ -53,11 +56,6 @@ export default class RegisterComponent {
       passwordConfirmValidator(REGISTRATION_KEYS.passwordCtrl, REGISTRATION_KEYS.confirmPasswordCtrl)
     ]
   });
-
-  constructor(private store: Store) {
-
-
-  }
 
   registerUser() : void {
     if(this.registerForm.invalid) {

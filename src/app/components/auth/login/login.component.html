@@ -1,0 +1,22 @@
+<section>
+  <nav>
+    <a [routerLink]="['/']" routerLinkActive="router-link-active" >Back</a>
+  </nav>
+  <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
+    <mat-form-field>
+      <mat-label>{{"auth.field.email" | translate}}</mat-label>
+      <input matInput id="email" class="formControl" type="email" [formControl]="emailFormControl">
+      <mat-error *ngIf="emailFormControl.errors?.['required']">{{'auth.error.required' | translate}}</mat-error>
+      <mat-error *ngIf="emailFormControl.errors?.['emailFormatInvalid']">{{'auth.error.email.valid' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{"auth.field.pwd" | translate}}</mat-label>
+      <input matInput id="password" class="formControl" type="password" [formControl]="passwordFormControl">
+      <mat-error *ngIf="passwordFormControl.errors?.['required']">{{'auth.error.required' | translate}}</mat-error>
+    </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary">{{'auth.login' | translate}}</button>
+
+  </form>
+</section>
