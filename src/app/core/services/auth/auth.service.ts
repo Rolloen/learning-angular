@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { UserRegistrationModel } from '../../models/user.model';
+import { UserLoginModel, UserRegistrationModel } from '../../models/user.model';
 import { HttpCustomError } from '../../models/httpErrors.model';
 import { environment } from 'src/environments/environment';
 
 const API_URLS = {
-  register: environment.apiUrl + 'users/register'
+  register: environment.apiUrl + 'users/register',
+  login: environment.apiUrl + 'users/login',
+
 }
 
 @Injectable({
@@ -20,6 +22,12 @@ export class AuthService {
 
   registerUser(userToRegister: UserRegistrationModel) {
     return this.http.post<boolean | HttpCustomError>(API_URLS.register, userToRegister).pipe(
+      map((res)=> res),
+      catchError((err: HttpCustomError) => throwError(() => err))
+    )
+  }
+  loginUser(userToLogin: UserLoginModel) {
+    return this.http.post<boolean | HttpCustomError>(API_URLS.login, userToLogin).pipe(
       map((res)=> res),
       catchError((err: HttpCustomError) => throwError(() => err))
     )

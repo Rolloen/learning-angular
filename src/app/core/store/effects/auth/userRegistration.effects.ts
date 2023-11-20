@@ -4,7 +4,7 @@ import { catchError, exhaustMap, map, of } from "rxjs";
 
 import { AuthService } from "src/app/core/services/auth/auth.service";
 import { HttpCustomError } from "src/app/core/models/httpErrors.model";
-import { UserRegisterActions } from "../../actions/userRegistration.actions";
+import { UserRegisterActions } from "../../actions/auth.actions";
 
 
 export const registerNewUser = createEffect(

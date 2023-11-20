@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { AUTH_CONST } from '../../../core/constants/auth.const';
 import { UserRegistrationModel } from '../../../core/models/user.model';
-import { UserRegisterActions } from '../../../core/store/actions/userRegistration.actions';
+import { UserRegisterActions } from '../../../core/store/actions/auth.actions';
 import emailFormatValidator from '../../../core/validators/emailValidator/email.validator';
 import { passwordConfirmValidator, passwordFormatValidator } from '../../../core/validators/passwordValidator/password.validator';
 

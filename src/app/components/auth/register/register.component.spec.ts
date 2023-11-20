@@ -4,14 +4,13 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import  RegisterComponent  from './register.component';
-import { registrationState, userRegistrationReducers } from '../../../core/store/reducers/registration/userRegistration.reducers';
+import { authState, userRegistrationReducers } from '../../../core/store/reducers/auth/userAuth.reducers';
 import { RouterTestingModule } from '@angular/router/testing';
-
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
-  let mockStore: MockStore<registrationState>;
+  let mockStore: MockStore<authState>;
   const initialState = {
     registration: userRegistrationReducers
   };

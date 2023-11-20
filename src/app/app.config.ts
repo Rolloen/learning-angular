@@ -9,8 +9,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
-import * as registrationsEffects from './core/store/effects/registration/userRegistration.effects';
-import { userRegistrationReducers } from './core/store/reducers/registration/userRegistration.reducers';
+import * as registrationsEffects from './core/store/effects/auth/userRegistration.effects';
+import { userRegistrationReducers } from './core/store/reducers/auth/userAuth.reducers';
 
 function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

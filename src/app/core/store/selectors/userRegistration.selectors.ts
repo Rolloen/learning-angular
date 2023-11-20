@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../store.config';
-import { registrationState } from '../reducers/registration/userRegistration.reducers';
+import { registrationState } from '../reducers/auth/userAuth.reducers';
 
 export const selectFeature = (state: AppState) => state.registration;
 

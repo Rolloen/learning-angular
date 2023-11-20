@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { UserRegistrationModel } from "../../models/user.model";
+import { UserLoginModel, UserRegistrationModel } from "../../models/user.model";
 
 
 export const UserRegisterActions = createActionGroup({
@@ -12,8 +12,21 @@ export const UserRegisterActions = createActionGroup({
 })
 
 
+
+export const UserLoginActions = createActionGroup({
+  source: 'User',
+  events: {
+    loginUser: props<{ props: UserLoginModel }>(),
+  }
+})
+
+
 export const {
   registerUser,
   registerSuccess,
   registerFailed
 } = UserRegisterActions
+
+export const {
+  loginUser,
+} = UserLoginActions

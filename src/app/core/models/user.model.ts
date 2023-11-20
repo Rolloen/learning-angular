@@ -9,3 +9,7 @@ export interface UserRegistrationModel {
   email?: string | null,
   password?: string | null
 }
+export interface UserLoginModel {
+  email?: string | null,
+  password?: string | null
+}
