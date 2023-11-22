@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { validRegistrationUserMock } from 'src/app/shared/models/mock/usersModel.mock';
 import AuthServiceMock from 'src/app/shared/tests/services/authService.mock.service';
 import { UserRegisterActions } from '../../actions/auth.actions';
-import { registerNewUser } from './userRegistration.effects';
+import { registerNewUser } from './userAuth.effects';
 
 describe('', () => {
   let authServicemock : AuthService;

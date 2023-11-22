@@ -4,7 +4,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import  RegisterComponent  from './register.component';
-import { authState, userRegistrationReducers } from '../../../core/store/reducers/auth/userAuth.reducers';
+import { authState, userAuthReducers } from '../../../core/store/reducers/auth/userAuth.reducers';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RegisterComponent', () => {
@@ -12,7 +12,7 @@ describe('RegisterComponent', () => {
   let fixture: ComponentFixture<RegisterComponent>;
   let mockStore: MockStore<authState>;
   const initialState = {
-    registration: userRegistrationReducers
+    auth: userAuthReducers
   };
   beforeEach(() => {
     TestBed.configureTestingModule({

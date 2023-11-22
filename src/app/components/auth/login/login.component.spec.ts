@@ -1,20 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockState, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { authState, initialState } from 'src/app/core/store/reducers/auth/userAuth.reducers';
 import LoginComponent from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
+  let mockStore : MockState<authState>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [LoginComponent, RouterTestingModule, TranslateModule.forRoot(), BrowserAnimationsModule]
+      imports: [LoginComponent, RouterTestingModule, TranslateModule.forRoot(), BrowserAnimationsModule],
+      providers: [
+        provideMockStore({ initialState })
+      ]
     });
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
+    mockStore = TestBed.inject(MockState)
     fixture.detectChanges();
   });
 

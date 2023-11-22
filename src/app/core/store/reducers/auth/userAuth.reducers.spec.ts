@@ -1,11 +1,9 @@
-import { UserLoginModel } from 'src/app/core/models/user.model';
-import { registerSuccess, loginUser } from '../../actions/auth.actions';
+import { UserLoginModel, UserModel } from 'src/app/core/models/user.model';
+import { UserLoginActions, UserRegisterActions } from '../../actions/auth.actions';
 import * as fromReducer from './userAuth.reducers';
 
 
 describe('Auth reducers test', () => {
-
-
   describe('user register reducers', () => {
     describe('unknown action', () => {
       it('should return the default state', () => {
@@ -13,7 +11,7 @@ describe('Auth reducers test', () => {
         const action = {
           type: 'Unknown',
         };
-        const state = fromReducer.userRegistrationReducers(initialState, action);
+        const state = fromReducer.userAuthReducers(initialState, action);
 
         expect(state).toBe(initialState);
       });
@@ -24,9 +22,8 @@ describe('Auth reducers test', () => {
         //GIVEN
         const { initialState } = fromReducer;
         //WHEN
-        const action = registerSuccess();
-        const state = fromReducer.userRegistrationReducers(initialState, action);
-
+        const action = UserRegisterActions.registerSuccess();
+        const state = fromReducer.userAuthReducers(initialState, action);
         //THEN
         expect(state.isRegistered).toBe(true);
       })
@@ -40,7 +37,7 @@ describe('Auth reducers test', () => {
         type: 'Unknown'
       }
       //WHEN
-      const afterState = fromReducer.userLoginReducers(initialState, action);
+      const afterState = fromReducer.userAuthReducers(initialState, action);
       //THEN
       expect(afterState).toBe(initialState);
     });
@@ -48,12 +45,22 @@ describe('Auth reducers test', () => {
       //GIVEN
       const { initialState } = fromReducer;
       const userInfos  : UserLoginModel = { email: 'test@test.com', password:'Test@1234'};
-      const action = loginUser({ props: userInfos })
+      const action = UserLoginActions.loginUser({ props: userInfos })
       //WHEN
-      const afterState = fromReducer.userLoginReducers(initialState, action);
-
+      const afterState = fromReducer.userAuthReducers(initialState, action);
       //THEN
       expect(afterState.isLoading).toBe(true);
+    });
+    it('Should update state with isLoading : false and isLoggedIn : true when action "loginSuccess" is dispatched', () => {
+      //GIVEN
+      const { initialState } = fromReducer;
+      const userInfos : UserModel = { email: 'test@test.com', username: 'Testing', creationDate : new Date()};
+      const action = UserLoginActions.loginSuccess({props: userInfos});
+      const expectState : fromReducer.authState = {...initialState, isLoading: false, isLoggedIn : true};
+      //WHEN
+      const afterState = fromReducer.userAuthReducers(initialState, action);
+      //THEN
+      expect(afterState).toEqual(expectState);
     });
   })
 

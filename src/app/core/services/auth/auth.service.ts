@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { UserLoginModel, UserRegistrationModel } from '../../models/user.model';
+import { UserLoginModel, UserModel, UserRegistrationModel } from '../../models/user.model';
 import { HttpCustomError } from '../../models/httpErrors.model';
 import { environment } from 'src/environments/environment';
 
@@ -27,7 +27,7 @@ export class AuthService {
     )
   }
   loginUser(userToLogin: UserLoginModel) {
-    return this.http.post<boolean | HttpCustomError>(API_URLS.login, userToLogin).pipe(
+    return this.http.post<UserModel | HttpCustomError>(API_URLS.login, userToLogin).pipe(
       map((res)=> res),
       catchError((err: HttpCustomError) => throwError(() => err))
     )

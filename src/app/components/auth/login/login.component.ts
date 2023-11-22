@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { UserLoginModel } from 'src/app/core/models/user.model';
+import { UserLoginActions } from 'src/app/core/store/actions/auth.actions';
 import emailFormatValidator from 'src/app/core/validators/emailValidator/email.validator';
 
 @Component({
@@ -15,6 +18,8 @@ import emailFormatValidator from 'src/app/core/validators/emailValidator/email.v
   styleUrls: ['./login.component.scss']
 })
 export default class LoginComponent {
+
+  store = inject(Store);
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -33,5 +38,12 @@ export default class LoginComponent {
     if(this.loginFormGroup.invalid) {
       return;
     }
+
+    let loginUser : UserLoginModel= {
+      email: this.emailFormControl.value,
+      password: this.passwordFormControl.value
+    }
+
+    this.store.dispatch(UserLoginActions.loginUser({ props: loginUser }));
   }
 }
