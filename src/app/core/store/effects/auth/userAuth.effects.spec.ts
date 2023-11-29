@@ -2,10 +2,11 @@ import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { validRegistrationUserMock } from 'src/app/shared/models/mock/usersModel.mock';
+import { validLoginUserMock, validRegistrationUserMock, validUserDataMock } from 'src/app/shared/models/mock/usersModel.mock';
 import AuthServiceMock from 'src/app/shared/tests/services/authService.mock.service';
-import { UserRegisterActions } from '../../actions/auth.actions';
-import { registerNewUser } from './userAuth.effects';
+import { UserLoginActions, UserRegisterActions } from '../../actions/auth.actions';
+import { loginUser, registerNewUser, updateUserData } from './userAuth.effects';
+import { UserDataActions } from '../../actions/user.actions';
 
 describe('', () => {
   let authServicemock : AuthService;
@@ -17,12 +18,11 @@ describe('', () => {
         AuthServiceMock
       ]
     });
-
     authServicemock = TestBed.inject(AuthService);
-  })
+  });
 
   describe('Testing RegisterUserEffect', () => {
-    it('Should call registerUser from AuthService when registerUser Action is called', (done) => {
+    it('Should call registerUser from AuthService when registerUser Action is called', () => {
       //GIVEN
       const mockProps  = validRegistrationUserMock;
       //WHEN
@@ -31,10 +31,9 @@ describe('', () => {
       // THEN
       registerNewUser(actionMock$, authServicemock).subscribe(() => {
         expect(authServicemock.registerUser).toHaveBeenCalledTimes(1);
-        done();
       });
-    })
-    it('should call registerSuccess() Action when given a valid user when registerUser Action is called', (done) => {
+    });
+    it('should call registerSuccess() Action when given a valid user when registerUser Action is called', () => {
       //GIVEN
       const mockProps = validRegistrationUserMock;
       //WHEN
@@ -45,9 +44,53 @@ describe('', () => {
         expect(action).toEqual(
           UserRegisterActions.registerSuccess()
         )
-        done();
       });
-    })
+    });
+  })
+
+  describe('Testing LoginUser effect',() => {
+    it('Should call loginuser from AuthService when loginUser Action is called', () => {
+      //GIVEN
+      const mockProps = validLoginUserMock;
+      const mockUserData = validUserDataMock;
+      //WHEN
+      const actionMock$ = of(UserLoginActions.loginUser({ props: mockProps }));
+      spyOn(authServicemock, 'loginUser').and.callFake(() => of(mockUserData));
+      // THEN
+      loginUser(actionMock$, authServicemock).subscribe(() => {
+        expect(authServicemock.loginUser).toHaveBeenCalledWith(mockProps);
+      });
+    });
+
+    it('should call loginSuccess() Action when given a registered user when loginUser Action is called', () => {
+      //GIVEN
+      const mockProps = validLoginUserMock;
+      const mockUserData = validUserDataMock;
+      //WHEN
+      const actionMock$ = of(UserLoginActions.loginUser({ props: mockProps }));
+      spyOn(authServicemock, 'loginUser').and.callFake(() => of(mockUserData));
+      // THEN
+      loginUser(actionMock$, authServicemock).subscribe((action) => {
+        expect(action).toEqual(
+          UserLoginActions.loginSuccess({ props: mockUserData })
+        )
+      });
+    });
+  })
+
+  describe('Testing updateUserData effect',() => {
+    it('Should call updateUserData action when loginSuccess Action is called', () => {
+      //GIVEN
+      const mockProps = validUserDataMock;
+      //WHEN
+      const actionMock$ = of(UserLoginActions.loginSuccess({ props: mockProps }));
+      // THEN
+      updateUserData(actionMock$).subscribe((action) => {
+        expect(action).toEqual(
+          UserDataActions.updateUserData({ props: mockProps })
+        )
+      });
+    });
   })
 })
 

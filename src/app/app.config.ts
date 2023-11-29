@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { routes } from './app.routes';
 import * as registrationsEffects from './core/store/effects/auth/userAuth.effects';
 import { userAuthReducers } from './core/store/reducers/auth/userAuth.reducers';
+import { userDataReducers } from './core/store/reducers/user/user.reducers';
 
 function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -33,6 +34,10 @@ export const appConfig: ApplicationConfig = {
     provideState({
       name: 'Auth',
       reducer: userAuthReducers
+    }),
+    provideState({
+      name: 'User',
+      reducer: userDataReducers
     }),
     provideEffects(registrationsEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),

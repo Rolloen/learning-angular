@@ -10,7 +10,6 @@ export interface userState {
 
 export const initialState : userState = {};
 
-
 export const userDataReducers = createReducer(
   initialState,
   on(UserDataActions.updateUserData, (state, action) => ({ ...state, userData : action.props, lastUpdated : new Date() })),
